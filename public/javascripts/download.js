@@ -29,12 +29,11 @@ class DownloadTest {
     this.times = {
       start: 0,
       last: 0,
-      lastAll: 0,
       duration: 0,
       delta: 0,
       deltaSamples: Array(this.sampleCount).fill(0),
       deltaSamplesInterval: 0,
-      timeout: 20 * 1000,
+      timeout: 15 * 1000,
     };
     this.bytes = {
       delta: 0,
@@ -42,7 +41,7 @@ class DownloadTest {
       deltaSamplesSum: 0,
       last: Array(length).fill(0),
       lastAll: 0,
-      total: 300 * 1024 * 1024,
+      total: 400 * 1024 * 1024,
     }
     this.result = {
       averageSpeed: 0,
@@ -71,13 +70,11 @@ class DownloadTest {
       this.result.startedSendingData = true;
       this.times.start = this.times.start || timestamp;
       this.times.last = this.times.last || timestamp;
-      this.times.lastAll = timestamp;
     } else if (type == 'progress'){
       //progressing
       this.times.delta = timestamp - this.times.last;
       this.times.duration = timestamp - this.times.start;
       this.times.last = timestamp;
-      this.times.lastAll = timestamp;
       this.bytes.delta = loaded - this.bytes.last[index];
       this.bytes.last[index] = loaded;
       this.bytes.lastAll += this.bytes.delta;
