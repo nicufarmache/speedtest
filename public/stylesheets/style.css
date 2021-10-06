@@ -1,0 +1,15 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+#container {
+  --percentage: 0%;
+  padding: 20px;
+  border: 2px solid #00B7FF;
+  background: linear-gradient(to right, #c7e9f7 var(--percentage), white var(--percentage));
+}
