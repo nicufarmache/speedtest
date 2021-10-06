@@ -131,8 +131,7 @@ class DownloadTest {
   }
 
   abort() {
-    this.xhrList.forEach((xhr, index) => {
-      const url = `files/99?${performance.now()}.${index}`;
+    this.xhrList.forEach((xhr) => {
       xhr.abort();
     })
     this.finish();
@@ -146,7 +145,7 @@ class DownloadTest {
   startTest() {
     this.init();
     this.xhrList.forEach((xhr, index) => {
-      const url = `files/1?${performance.now()}.${index}`;
+      const url = `files/99?${performance.now()}.${index}`;
       xhr.open('GET', url);
       xhr.send();
     })
