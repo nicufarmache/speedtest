@@ -1,5 +1,6 @@
 class DownloadTest {
   constructor(updater, count = 10, sampleCount = 80) {
+    this.count = count;
     this.updater = updater;
     this.sampleCount = sampleCount;
     this.xhrList = [];
@@ -27,12 +28,12 @@ class DownloadTest {
     const length = this.xhrList.length;
     this.times = {
       start: 0,
-      last: Array(length).fill(0),
+      last: 0,
       lastAll: 0,
       duration: 0,
       delta: 0,
       deltaSamples: Array(this.sampleCount).fill(0),
-      deltaSamplesSum: 0,
+      deltaSamplesInterval: 0,
       timeout: 20 * 1000,
     };
     this.bytes = {
@@ -69,13 +70,13 @@ class DownloadTest {
     if (type == 'loadstart') {
       this.result.startedSendingData = true;
       this.times.start = this.times.start || timestamp;
-      this.times.last[index] = timestamp;
+      this.times.last = this.times.last || timestamp;
       this.times.lastAll = timestamp;
     } else if (type == 'progress'){
       //progressing
-      this.times.delta = timestamp - this.times.last[index];
+      this.times.delta = timestamp - this.times.last;
       this.times.duration = timestamp - this.times.start;
-      this.times.last[index] = timestamp;
+      this.times.last = timestamp;
       this.times.lastAll = timestamp;
       this.bytes.delta = loaded - this.bytes.last[index];
       this.bytes.last[index] = loaded;
@@ -108,8 +109,8 @@ class DownloadTest {
   }
 
   updateResult() {
-    this.result.averageSpeed = 8000 * this.bytes.deltaSamplesSum / this.times.deltaSamplesSum;
-    this.result.currentSpeed = 8000 * this.bytes.delta / this.times.delta;
+    this.result.averageSpeed = 8000 * this.bytes.lastAll / this.times.duration;
+    this.result.currentSpeed = 8000 * this.bytes.deltaSamplesSum / this.times.deltaSamplesSum;
 
     [this.result.averageSpeedScaled, this.result.averageSpeedUnit] = scaleUnits(this.result.averageSpeed);
     [this.result.currentSpeedScaled, this.result.currentSpeedUnit] = scaleUnits(this.result.currentSpeed);
