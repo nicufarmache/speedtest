@@ -18,6 +18,7 @@ a {
   width: 100vw;
   height: 100vh;
   background-color: rgb(178, 143, 227);
+  overflow: hidden;
 }
 
 #info {
@@ -136,4 +137,28 @@ a {
 
 .label-tbps {
   top: 6.8vw;
+}
+
+@media (max-aspect-ratio: 1/1) {
+  /* mobile */
+
+  #layer3, #layer5 {
+    display: none;
+  }
+
+  #rect11025 {
+    width: 108px;
+  }
+
+  #g4899 {
+    transform: translate(-167px, 0);
+  }
+
+  #background svg {
+    transform: translate(67.5vw,9.6vw) scale(2.4);
+  }
+
+  #info {
+    transform: translate(29vw,9.5vw) scale(2.4);
+  }
 }
