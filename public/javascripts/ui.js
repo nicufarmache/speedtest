@@ -90,6 +90,18 @@ class UI {
     }
   }
 
+  setScale(currentExponent) {
+    if (this.previousExponent !== currentExponent) {
+      for(const exponent in this.el.scaleLeds) {
+        this.el.scaleLeds[exponent].style.fill = this.colors.off;
+      }
+      if (this.el.scaleLeds[currentExponent]) {
+        this.el.scaleLeds[currentExponent].style.fill = this.colors.on;
+      }
+      this.previousExponent = currentExponent
+    }
+  }
+
   update({currentSpeedScaled, currentSpeedExponent, percentDone, done, canceled}) {
     if(done) {
       this.isOn = false;
@@ -102,9 +114,7 @@ class UI {
     } else {
       this.el.speed.innerText = `${Math.floor(currentSpeedScaled)}`;
       this.setProgress(percentDone);
-      for(const exponent in this.el.scaleLeds) {
-        this.el.scaleLeds[exponent].style.fill = (exponent == currentSpeedExponent)? this.colors.on : this.colors.off;
-      }
+      this.setScale(currentSpeedExponent);
       this.blinkLed(Math.floor(Math.random()*8));
     }
   }

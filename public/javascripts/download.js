@@ -123,7 +123,7 @@ class DownloadTest {
 
   decideIfEnough() {
     if (this.times.duration > this.times.timeout){
-      this.abort();
+      setTimeout(this.abort.bind(this), 1000);
     }
     if (this.bytes.lastAll > this.bytes.total){
       this.abort();
