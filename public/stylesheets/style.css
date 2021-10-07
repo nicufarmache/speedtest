@@ -53,7 +53,7 @@ a {
 }
 .startTest.on {
   color: #88FF88;
-  text-shadow: 0 0 2.5vw #0c9400;
+  box-shadow: 0px 0px 0.5vw 0px #88ff8859;
 }
 .startTest svg {
   width: 75%;
@@ -61,19 +61,20 @@ a {
 
 .progressBar, .progressBarBack {
   position: absolute;
-  bottom: 1vw;
+  bottom: 0.5vw;
   right: 6vw;
-  height: 1.5vw;
   font-family: "DSEG14-Classic-MINI";
-  font-size: 1.2vw;
-  font-weight: bold;
+  font-size: 1.3vw;
   color: #ffd900;
-  text-shadow: 0 0 2.5vw #947e00;
+  text-shadow: 0 0 0.3vw #947e00;
+  padding: 0.3vw;
+  border-radius: 0.2vw;
 }
 
 .progressBarBack {
-  color: #483e01;
-  text-shadow: 0 0 0.1vw #000000;;
+  color: #241f00;
+  text-shadow: none;
+  background: #121212;
 }
 
 .speedLabel {
@@ -87,17 +88,20 @@ a {
 .speed, .speedBack {
   position: absolute;
   right: 6vw;
-  top: 2vw;
+  top: 1.5vw;
   font-family: "DSEG14-Classic";
   font-size: 4vw;
   font-weight: bold;
   color: #ffd900;
-  text-shadow: 0 0 2.5vw #947e00;
+  text-shadow: 0 0 0.5vw #947e00;
+  padding: 0.5vw;
+  border-radius: 0.2vw;
 }
 
 .speedBack {
-  color: #483e01;
-  text-shadow: 0 0 0.1vw #000000;;
+  color: #241f00;
+  text-shadow: none;
+  background: #121212;
 }
 
 #aSpeedContainer {
