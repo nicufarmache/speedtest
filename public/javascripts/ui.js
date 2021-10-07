@@ -85,7 +85,7 @@ class UI {
       let number = Math.ceil(size * value/100);
       if (number < 0) number = 0;
       if (number > size) number = size;
-      const result = `${'+'.repeat(number)}${' '.repeat(size - number)}`
+      const result = `${'*'.repeat(number)}${' '.repeat(size - number)}`
       el.textContent = result.replaceAll(' ', '!');
     }
   }
