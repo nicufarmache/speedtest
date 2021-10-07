@@ -41,14 +41,21 @@ a {
   font-size: 2vw;
   background: #666666;
   color: #000000;
+  fill: currentColor;
   cursor: pointer;
   outline: none;
   box-shadow: none;
   -webkit-appearance: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .startTest.on {
   color: #88FF88;
   text-shadow: 0 0 2.5vw #0c9400;
+}
+.startTest svg {
+  width: 80%;
 }
 
 .progressBar, .progressBarBack {
