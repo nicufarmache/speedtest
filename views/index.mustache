@@ -2,17 +2,35 @@
 <html>
 <head>
   <title>Speedtest</title>
+  <link rel="stylesheet" href="stylesheets/dseg.css">
   <link rel="stylesheet" href="stylesheets/style.css">
 </head>
 <body>
-  <section id="container">
-    <h1>Speedtest</h1>
-    <button id="startTest">Start</button>
-    <h2>Speed: <span id="speed"></span></h2>
-    <h2>Average Speed: <span id="aSpeed"></span></h2>
-    <script src="javascripts/scale.js"></script>
-    <script src="javascripts/download.js"></script>
-    <script src="javascripts/ui.js"></script>
-  </section>
+  <article id="container">
+    <section id="background">
+      {{{svg}}}
+    </section>
+    <section id="info">
+      <button class="startTest">⏻</button>
+      <div class="speedLabel">Speed:</div>
+      <div class="speedBack">~~~</div>
+      <div class="speed"></div>
+      <div class="progressBarBack">~~~~~~~~~~~~~~~~~~~~~~</div>
+      <div class="progressBar"></div>
+      <div class="unitLabels">
+        <div class="unitLabel label-bps">b/s</div>
+        <div class="unitLabel label-kbps">kb/s</div>
+        <div class="unitLabel label-mbps">Mb/s</div>
+        <div class="unitLabel label-gbps">Gb/s</div>
+        <div class="unitLabel label-tbps">Tb/s</div>
+      </div>
+    </section>
+  </article>
+
+<h2 id="aSpeedContainer">Avg Speed: <span id="aSpeed"></span></h2>
+
+<script src="javascripts/scale.js"></script>
+<script src="javascripts/download.js"></script>
+<script src="javascripts/ui.js"></script>
 </body>
 </html>

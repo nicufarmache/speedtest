@@ -46,15 +46,17 @@ class DownloadTest {
     this.result = {
       averageSpeed: 0,
       averageSpeedScaled: 0,
-      averageSpeedUnit: 0,
+      averageSpeedUnit: '',
+      averageSpeedExponent: 0,
       currentSpeed: 0,
       currentSpeedScaled: 0,
-      currentSpeedUnit: 0,
+      currentSpeedUnit: '',
+      currentSpeedExponent: 0,
       percentDone:0,
       startedSendingData: false,
       loadedAllData: false,
       error: false,
-      abort: false,
+      canceled: false,
       done: false,
     };
   }
@@ -109,8 +111,8 @@ class DownloadTest {
     this.result.averageSpeed = 8000 * this.bytes.lastAll / this.times.duration;
     this.result.currentSpeed = 8000 * this.bytes.deltaSamplesSum / this.times.deltaSamplesSum;
 
-    [this.result.averageSpeedScaled, this.result.averageSpeedUnit] = scaleUnits(this.result.averageSpeed);
-    [this.result.currentSpeedScaled, this.result.currentSpeedUnit] = scaleUnits(this.result.currentSpeed);
+    [this.result.averageSpeedScaled, this.result.averageSpeedUnit, this.result.averageSpeedExponent] = scaleUnits(this.result.averageSpeed);
+    [this.result.currentSpeedScaled, this.result.currentSpeedUnit, this.result.currentSpeedExponent] = scaleUnits(this.result.currentSpeed);
 
     const percentDoneBytes = Math.ceil(100 * this.bytes.lastAll / this.bytes.total);
     const percentDoneTime = Math.ceil(100 * this.times.duration / this.times.timeout);
@@ -133,6 +135,11 @@ class DownloadTest {
       xhr.abort();
     })
     this.finish();
+  }
+
+  cancel() {
+    this.result.canceled = true;
+    this.abort();
   }
 
   finish() {
