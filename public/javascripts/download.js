@@ -1,5 +1,5 @@
 class DownloadTest {
-  constructor(updater, count = 10, sampleCount = 80) {
+  constructor(updater, count = 5, sampleCount = 80) {
     this.count = count;
     this.updater = updater;
     this.sampleCount = sampleCount;
