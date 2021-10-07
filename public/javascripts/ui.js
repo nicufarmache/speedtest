@@ -112,7 +112,8 @@ class UI {
         this.setProgress('TEST FINISHED');
       }
     } else {
-      this.el.speed.innerText = `${Math.floor(currentSpeedScaled)}`;
+      const roundedSpeed = `${currentSpeedScaled.toFixed(1)}`
+      this.el.speed.innerText = roundedSpeed.substr(0, 4);
       this.setProgress(percentDone);
       this.setScale(currentSpeedExponent);
       this.blinkLed(Math.floor(Math.random()*8));
