@@ -1,0 +1,29 @@
+#!/usr/bin/env node
+var fs = require('fs-extra');
+const httpMocks = require('node-mocks-http');
+const app = require('../app');
+
+const path = './static';
+
+fs.emptyDirSync(path);
+fs.copySync('./public', path)
+makeIndex();
+
+function makeIndex() {
+  const req = httpMocks.createRequest({
+    method: 'GET',
+    url: '/',
+    params: {
+      id: 42,
+    }
+  });
+  const res = httpMocks.createResponse({eventEmitter: require('events').EventEmitter});
+  delete res.render;
+
+  res.on('end', () => {
+    data = res._getData();
+    fs.writeFileSync(`${path}/index.html`, data, 'utf8');
+  })
+
+  app(req,res);
+}
