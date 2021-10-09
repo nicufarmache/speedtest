@@ -1,0 +1,164 @@
+body {
+  padding: 0;
+  margin: 0;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+#container {
+  position: relative;
+}
+
+#background {
+  position: absolute;
+  z-index: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgb(178, 143, 227);
+  overflow: hidden;
+}
+
+#info {
+  position: absolute;
+  z-index: 1;
+  width: 28vw;
+  height: 8vw;
+  margin: 4vw 7vw;
+  padding: 1vw;
+  color: #FFFFFF;
+  font-size: 1vw;
+}
+
+.startTest {
+  position: absolute;
+  border: 0;
+  height: 3vw;
+  width: 3vw;
+  top: 2.5vw;
+  border-radius: 1.5vw;
+  font-size: 2vw;
+  background: #666666;
+  color: #000000;
+  fill: currentColor;
+  cursor: pointer;
+  outline: none;
+  box-shadow: none;
+  -webkit-appearance: none;
+  padding:0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.startTest.on {
+  color: #88FF88;
+  box-shadow: 0px 0px 0.5vw 0px #88ff8859;
+}
+.startTest svg {
+  width: 75%;
+}
+
+.progressBar, .progressBarBack {
+  position: absolute;
+  bottom: 0.7vw;
+  right: 6vw;
+  font-family: "DSEG14-Classic-MINI";
+  font-size: 1.3vw;
+  color: #ffd900;
+  text-shadow: 0 0 0.3vw #947e00;
+  padding: 0.3vw;
+  border-radius: 0.2vw;
+}
+
+.progressBarBack {
+  color: #241f00;
+  text-shadow: none;
+  background: #121212;
+}
+
+.speedLabel {
+  margin: 1vw;
+  font-size: 2vw;
+  position: absolute;
+  top: 2vw;
+  left: 5vw;
+}
+
+.speed, .speedBack {
+  position: absolute;
+  right: 6vw;
+  top: 1.5vw;
+  font-family: "DSEG14-Classic";
+  font-size: 4vw;
+  font-weight: bold;
+  color: #ffd900;
+  text-shadow: 0 0 0.5vw #947e00;
+  padding: 0.5vw;
+  border-radius: 0.2vw;
+}
+
+.speedBack {
+  color: #241f00;
+  text-shadow: none;
+  background: #121212;
+}
+
+#aSpeedContainer {
+  display: none;
+}
+
+.unitLabels{
+  position: absolute;
+  top: 1.3vw;
+  left: 26.3vw;
+}
+
+.unitLabel {
+  position: absolute;
+}
+
+.label-bps {
+  top: 0vw;
+}
+
+.label-kbps {
+  top: 1.7vw;
+}
+
+.label-mbps {
+  top: 3.4vw;
+}
+
+.label-gbps {
+  top: 5.2vw;
+}
+
+.label-tbps {
+  top: 6.8vw;
+}
+
+@media (max-aspect-ratio: 1/1) {
+  /* mobile */
+
+  #layer3, #layer5 {
+    display: none;
+  }
+
+  #rect11025 {
+    width: 108px;
+  }
+
+  #g4899 {
+    transform: translate(-167px, 0);
+  }
+
+  #background svg {
+    transform: translate(67.5vw,9.6vw) scale(2.4);
+  }
+
+  #info {
+    transform: translate(29vw,9.5vw) scale(2.4);
+  }
+}
