@@ -1,6 +1,6 @@
-const TEST_FILE = '1000';
+const TEST_FILE = '99';
 const MAX_BYTES = 20000 * 1024 * 1024;
-const MAX_SECONDS = 15 * 1000;
+const MAX_SECONDS = 10 * 1000;
 const THREAD_COUNT = 3;
 const SAMPLE_COUNT = 80;
 const CHECK_TIME = 1200;

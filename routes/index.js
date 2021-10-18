@@ -7,8 +7,8 @@ var power = fs.readFileSync('./public/images/power.svg', 'utf8');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  console.log('get index');
-  res.render('index', { svg, power });
+  const nocache = Date.now();
+  res.render('index', { svg, power, nocache});
 });
 
 module.exports = router;
