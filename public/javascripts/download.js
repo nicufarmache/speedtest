@@ -1,5 +1,13 @@
+const TEST_FILE = '99';
+const MAX_BYTES = 20000 * 1024 * 1024;
+const MAX_SECONDS = 10 * 1000;
+const THREAD_COUNT = 3;
+const SAMPLE_COUNT = 80;
+const CHECK_TIME = 1200;
+const ABORT_TIME = 1000;
+
 class DownloadTest {
-  constructor(updater, count = 5, sampleCount = 80) {
+  constructor(updater, count = THREAD_COUNT, sampleCount = SAMPLE_COUNT) {
     this.count = count;
     this.updater = updater;
     this.sampleCount = sampleCount;
@@ -33,7 +41,7 @@ class DownloadTest {
       delta: 0,
       deltaSamples: Array(this.sampleCount).fill(0),
       deltaSamplesInterval: 0,
-      timeout: 15 * 1000,
+      timeout: MAX_SECONDS,
     };
     this.bytes = {
       delta: 0,
@@ -41,7 +49,7 @@ class DownloadTest {
       deltaSamplesSum: 0,
       last: Array(length).fill(0),
       lastAll: 0,
-      total: 400 * 1024 * 1024,
+      total: MAX_BYTES,
     }
     this.result = {
       averageSpeed: 0,
@@ -72,6 +80,7 @@ class DownloadTest {
       this.result.startedSendingData = true;
       this.times.start = this.times.start || timestamp;
       this.times.last = this.times.last || timestamp;
+      this.bytes.last[index] = 0;
     } else if (type == 'progress'){
       //progressing
       this.times.delta = timestamp - this.times.last;
@@ -85,10 +94,8 @@ class DownloadTest {
       this.updateResult();
       this.decideIfEnough();
     } else if (type == 'load'){
-      this.result.loadedAllData = true;
-      this.abort();
+      this.restartXHR(this.xhrList[index], index)
     } else if (type == 'error'){
-      this.result.error = true;
       this.abort();
     }
   }
@@ -121,9 +128,13 @@ class DownloadTest {
     this.updater && this.updater(this.result);
   }
 
-  decideIfEnough() {
+  decideIfEnough(options) {
     if (this.times.duration > this.times.timeout){
-      setTimeout(this.abort.bind(this), 1000);
+      if (options == 'nowait') {
+        this.abort();
+      } else {
+        setTimeout(this.abort.bind(this), ABORT_TIME);
+      }
     }
     if (this.bytes.lastAll > this.bytes.total){
       this.abort();
@@ -147,13 +158,18 @@ class DownloadTest {
     this.updater && this.updater(this.result);
   }
 
+  restartXHR(xhr, index) {
+    const url = `files/${TEST_FILE}?${performance.now()}.${index}`;
+    xhr.open('GET', url);
+    xhr.send();
+  }
+
   startTest() {
     this.init();
-    this.xhrList.forEach((xhr, index) => {
-      const url = `files/99?${performance.now()}.${index}`;
-      xhr.open('GET', url);
-      xhr.send();
-    })
+    this.xhrList.forEach(this.restartXHR, this);
+    this.timer = setInterval(() => {
+      this.decideIfEnough('nowait');
+    }, CHECK_TIME)
   }
 }
 

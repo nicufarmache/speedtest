@@ -4,10 +4,13 @@ const httpMocks = require('node-mocks-http');
 const app = require('../app');
 
 const path = './static';
+const serverPath = '/usr/local/var/www';
 
 fs.emptyDirSync(path);
 fs.copySync('./public', path)
 makeIndex();
+fs.emptyDirSync(serverPath);
+fs.copySync(path, serverPath);
 
 function makeIndex() {
   const req = httpMocks.createRequest({
@@ -23,6 +26,7 @@ function makeIndex() {
   res.on('end', () => {
     data = res._getData();
     fs.writeFileSync(`${path}/index.html`, data, 'utf8');
+    fs.writeFileSync(`${serverPath}/index.html`, data, 'utf8');
   })
 
   app(req,res);
